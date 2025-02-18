@@ -1,30 +1,41 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link to="/about">About</router-link>
-  </nav>
-  <router-view/>
+  <div class="app-container">
+    <!-- Sidebar -->
+    <Sidebar :active-page="activePage" @navigate="setActivePage" />
+
+    <!-- Main Content -->
+    <MainContent :active-page="activePage" />
+  </div>
 </template>
 
+<script>
+import Sidebar from './components/Sidebar.vue';
+import MainContent from './components/MainContent.vue';
+
+export default {
+  components: { Sidebar, MainContent },
+  data() {
+    return {
+      activePage: 'home', // Página activa por defecto
+    };
+  },
+  methods: {
+    setActivePage(page) {
+      this.activePage = page;
+    },
+  },
+};
+</script>
+
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+.app-container {
+  display: flex;
+  height: 100vh;
 }
 
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+/* Estilos generales */
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
 }
 </style>
