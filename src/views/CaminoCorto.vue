@@ -121,7 +121,7 @@ export default {
         });
 
         // Enviar la red al backend
-        const response = await axios.post("http://localhost:5000/caminocorto", {
+        const response = await axios.post(`${this.$apiBaseUrl}/caminocorto`, {
           graph: graph,
           start: inicio,
           end: fin,

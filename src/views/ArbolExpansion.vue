@@ -108,7 +108,7 @@ export default {
         });
 
         // Enviar la red al backend
-        const response = await axios.post("http://localhost:5000/mst", {
+        const response = await axios.post(`${this.$apiBaseUrl}/mst`, {
           nodes: nodosArray,
           edges: this.edges,
         });

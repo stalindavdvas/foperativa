@@ -114,7 +114,7 @@ export default {
     },
     async handleSolve() {
       try {
-        const response = await fetch("http://localhost:5000/bigm", {
+        const response = await fetch(`${this.$apiBaseUrl}/bigm`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

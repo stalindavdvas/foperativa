@@ -144,7 +144,7 @@ export default {
     },
     async handleSolve() {
       try {
-        const response = await fetch("http://localhost:5000/costominimo", {
+        const response = await fetch(`${this.$apiBaseUrl}/costominimo`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

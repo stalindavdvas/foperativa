@@ -162,7 +162,7 @@ export default {
     },
     async handleSolve() {
       try {
-        const response = await fetch("http://localhost:5000/dual", {
+        const response = await fetch(`${this.$apiBaseUrl}/dual`, {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({

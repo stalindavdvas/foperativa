@@ -125,7 +125,7 @@ export default {
         });
 
         // Enviar la red al backend
-        const response = await axios.post("http://localhost:5000/flujomaximo", {
+        const response = await axios.post(`${this.$apiBaseUrl}/flujomaximo`, {
           graph: graph,
           source: fuente,
           sink: sumidero,
