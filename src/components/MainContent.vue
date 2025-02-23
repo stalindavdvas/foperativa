@@ -5,11 +5,11 @@
 </template>
 
 <script>
-import Home from '../views/Home.vue';
+import HomePage from '../views/Home.vue';
 import SimplexPage from '../views/SimplexPage.vue';
-import GranMPage from '../views/GranM.vue';
-import DosFasesMPage from '../views/DosFases.vue';
-import DualPage from '../views/Dual.vue';
+import GranMPage from '../views/GranMP.vue';
+import DosFasesMPage from '../views/DosFasesP.vue';
+import DualPage from '../views/DualP.vue';
 import EsqNor from '../views/EsquinaNoroeste.vue';
 import CosMin from '../views/CostoMinimo.vue';
 import VogelPage from '../views/Vogel.vue';
@@ -19,7 +19,7 @@ import ArbolPage from '../views/ArbolExpansion.vue';
 
 
 export default {
-  components: { Home, SimplexPage,GranMPage,DosFasesMPage,DualPage, CosMin,EsqNor,VogelPage,CaminoCortoPage,FlujoMaximoPage,ArbolPage },
+  components: { HomePage, SimplexPage,GranMPage,DosFasesMPage,DualPage, CosMin,EsqNor,VogelPage,CaminoCortoPage,FlujoMaximoPage,ArbolPage },
   props: ['activePage'],
   computed: {
     currentView() {
