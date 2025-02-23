@@ -88,6 +88,11 @@
         </div>
       </div>
     </div>
+    <!-- Barra de Carga -->
+    <div v-if="isLoading" class="loading-overlay">
+            <div class="spinner"></div>
+            <p>Calculando...</p>
+        </div>
 
 
     <!-- Resultados -->
@@ -165,6 +170,7 @@ export default {
             );
         },
         async handleSolve() {
+          this.isLoading = true; // Activar la barra de carga
             // Validar que la función objetivo no contenga NaN
             if (this.objectiveFunction.some(isNaN)) {
                 this.error = "La función objetivo contiene valores inválidos.";
@@ -196,7 +202,9 @@ export default {
                 }
 
                 const result = await response.json();
+                console.log("📥 Respuesta del backend:", result); // Debugging en consola
                 this.results = result;
+                
 
                 // Mostrar el análisis de sensibilidad
                 this.interpretacion = result.interpretation || "No se pudo generar el análisis de sensibilidad.";
@@ -204,6 +212,8 @@ export default {
                 console.error("Error al resolver el problema:", error);
                 this.error =
                     "Ocurrió un error al resolver el problema. Verifica los datos ingresados.";
+            }finally {
+                this.isLoading = false; // Desactivar la barra de carga
             }
         },
     },
@@ -255,5 +265,41 @@ button {
 textarea {
   width: 100%;
   height: 40%;
+}
+/* Estilo para la barra de carga */
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+}
+
+.spinner {
+    border: 4px solid #f3f3f3;
+    /* Light grey */
+    border-top: 4px solid #3498db;
+    /* Blue */
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    animation: spin 1s linear infinite;
+    margin-bottom: 10px;
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
 </style>
