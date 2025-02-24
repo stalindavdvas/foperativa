@@ -155,6 +155,7 @@ export default {
             results: null,
             interpretacion: "",
             error: null,
+            isLoading: false, // Estado para la barra de carga
         };
     },
     methods: {
@@ -166,6 +167,7 @@ export default {
             );
         },
         async handleSolve() {
+            this.isLoading = true; // Activar la barra de carga
             // Validar que la función objetivo no contenga NaN
             if (this.objectiveFunction.some(isNaN)) {
                 this.error = "La función objetivo contiene valores inválidos.";
@@ -205,6 +207,8 @@ export default {
                 console.error("Error al resolver el problema:", error);
                 this.error =
                     "Ocurrió un error al resolver el problema. Verifica los datos ingresados.";
+            }finally {
+                this.isLoading = false; // Desactivar la barra de carga
             }
         },
     },

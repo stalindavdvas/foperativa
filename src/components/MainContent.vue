@@ -10,16 +10,17 @@ import SimplexPage from '../views/SimplexPage.vue';
 import GranMPage from '../views/GranMP.vue';
 import DosFasesMPage from '../views/DosFasesP.vue';
 import DualPage from '../views/DualP.vue';
-import EsqNor from '../views/EsquinaNoroeste.vue';
-import CosMin from '../views/CostoMinimo.vue';
-import VogelPage from '../views/Vogel.vue';
-import CaminoCortoPage from '../views/CaminoCorto.vue';
-import FlujoMaximoPage from '../views/FlujoMaximo.vue';
-import ArbolPage from '../views/ArbolExpansion.vue';
+import EsqNor from '../views/EsquinaNoroesteP.vue';
+import CosMin from '../views/CostoMinimoP.vue';
+import VogelPage from '../views/VogelP.vue';
+import CaminoCortoPage from '../views/CaminoCortoP.vue';
+import FlujoMaximoPage from '../views/FlujoMaximoP.vue';
+import FlujoCostoMinPage from '../views/FlujoCostoMinP.vue';
+import ArbolPage from '../views/ArbolExpansionP.vue';
 
 
 export default {
-  components: { HomePage, SimplexPage,GranMPage,DosFasesMPage,DualPage, CosMin,EsqNor,VogelPage,CaminoCortoPage,FlujoMaximoPage,ArbolPage },
+  components: { HomePage, SimplexPage,GranMPage,DosFasesMPage,DualPage, CosMin,EsqNor,VogelPage,CaminoCortoPage,FlujoMaximoPage,ArbolPage,FlujoCostoMinPage },
   props: ['activePage'],
   computed: {
     currentView() {
@@ -46,6 +47,8 @@ export default {
           return 'FlujoMaximoPage';
         case 'arbol':
           return 'ArbolPage';
+        case 'flujominimo':
+          return 'FlujoCostoMinPage';
 
  
         default:

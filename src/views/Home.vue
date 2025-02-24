@@ -3,7 +3,7 @@
     <!-- Encabezado con animación -->
     <header class="header">
       <h1 class="title">Bienvenido a <span class="highlight">OptiCalc</span></h1>
-      <p class="subtitle">Tu herramienta definitiva para resolver problemas de optimización</p>
+      <p class="subtitle">Calculadora Web para metodos de optimizacion.</p>
     </header>
 
     <!-- Tarjetas de funcionalidades -->
@@ -40,7 +40,7 @@
     <!-- Pie de página -->
     <footer class="footer">
       <p class="footer-text">
-        © 2023 OptiCalc. Todos los derechos reservados.
+        © 2024 OptiCalc.Stalin Vasco- Jefferson Llerena- Andres Paida- Josue Riofrio
       </p>
     </footer>
   </div>

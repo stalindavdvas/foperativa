@@ -65,6 +65,7 @@ export default {
             { label: 'Camino Más Corto', page: 'caminocorto' },
             { label: 'Flujo Máximo', page: 'flujomaximo' },
             { label: 'Árbol de Expansión Mínima', page: 'arbol' },
+            { label: 'Flujo Costo Mínimo', page: 'flujominimo' },
           ],
         },
       ],

@@ -159,6 +159,7 @@ export default {
             results: null,
             interpretacion: "",
             error: null,
+            isLoading: false, // Estado para la barra de carga
         };
     },
     methods: {
