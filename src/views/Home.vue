@@ -35,6 +35,15 @@
           Analiza y optimiza redes de flujo, rutas críticas y más.
         </p>
       </div>
+      <div class="feature-card">
+        <div class="icon-container">
+          <i class="fas fa-network-wired"></i>
+        </div>
+        <h3 class="feature-title">Programación Dinámica</h3>
+        <p class="feature-description">
+          Resolución de Optimización de carga en transporte
+        </p>
+      </div>
     </section>
 
     <!-- Pie de página -->

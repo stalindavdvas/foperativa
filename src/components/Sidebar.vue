@@ -68,6 +68,14 @@ export default {
             { label: 'Flujo Costo Mínimo', page: 'flujominimo' },
           ],
         },
+        {
+          label: 'Programacion Dinámica',
+          icon: 'bi bi-diagram-3',
+          isOpen: false, // Estado para controlar si el submenú está abierto
+          children: [
+            { label: 'Problema de Mochila', page: 'mochila' },
+          ],
+        },
       ],
     };
   },
@@ -115,6 +123,7 @@ export default {
   padding: 0;
   margin: 0;
   flex-grow: 1;
+  border: 1px;
 }
 
 .sidebar-item {
@@ -123,6 +132,8 @@ export default {
   color: white;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  border: 1px;
+  border-color: antiquewhite;
 }
 
 .menu-item-content {
@@ -145,6 +156,7 @@ export default {
   margin-right: 10px;
   font-size: 1.2rem;
   color: #3498db;
+  border: 1px;
 }
 
 .sidebar-item.active i {

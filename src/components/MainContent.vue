@@ -17,10 +17,11 @@ import CaminoCortoPage from '../views/CaminoCortoP.vue';
 import FlujoMaximoPage from '../views/FlujoMaximoP.vue';
 import FlujoCostoMinPage from '../views/FlujoCostoMinP.vue';
 import ArbolPage from '../views/ArbolExpansionP.vue';
+import MochilaPage from '../views/MochilaP.vue';
 
 
 export default {
-  components: { HomePage, SimplexPage,GranMPage,DosFasesMPage,DualPage, CosMin,EsqNor,VogelPage,CaminoCortoPage,FlujoMaximoPage,ArbolPage,FlujoCostoMinPage },
+  components: { HomePage, SimplexPage,GranMPage,DosFasesMPage,DualPage, CosMin,EsqNor,VogelPage,CaminoCortoPage,FlujoMaximoPage,ArbolPage,FlujoCostoMinPage,MochilaPage },
   props: ['activePage'],
   computed: {
     currentView() {
@@ -49,6 +50,8 @@ export default {
           return 'ArbolPage';
         case 'flujominimo':
           return 'FlujoCostoMinPage';
+        case 'mochila':
+          return 'MochilaPage';
 
  
         default:
