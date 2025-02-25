@@ -3,7 +3,7 @@
         <h1>Problema de la Mochila</h1>
         <div class="card">
             <div class="card-header">
-               
+
             </div>
             <div class="card-body">
                 <!-- Textarea para la descripción del problema -->
@@ -28,6 +28,7 @@
                         <input type="text" v-model="item.nombre" placeholder="Nombre del producto" />
                         <input type="number" v-model="item.peso" placeholder="Peso" />
                         <input type="number" v-model="item.valor" placeholder="Valor" />
+                        <input type="number" v-model="item.cantidad_maxima" placeholder="Cantidad Máxima" />
                         <button @click="eliminarElemento(index)" class="btn-delete">Eliminar</button>
                     </div>
                     <button @click="agregarElemento" class="btn-add">Agregar Elemento</button>
@@ -35,7 +36,7 @@
             </div>
         </div>
 
-    
+
         <!-- Entrada para la capacidad de la mochila -->
         <div class="capacity-input">
             <label for="capacity">Capacidad de la Mochila:</label>
@@ -60,10 +61,10 @@
             <p><strong>Valor Máximo:</strong> {{ resultado.max_value }}</p>
             <p><strong>Elementos Seleccionados:</strong></p>
             <ul>
-                <li v-for="(nombre, idx) in resultado.selected_items" :key="idx">
-                    {{ nombre }}
-                </li>
-            </ul>
+        <li v-for="(producto, nombre) in resultado.selected_items" :key="nombre">
+          {{ nombre }} (Cantidad: {{ producto.cantidad }}, Peso Unitario: {{ producto.peso_unitario }}, Valor Unitario: {{ producto.valor_unitario }})
+        </li>
+      </ul>
 
             <!-- Interpretación Estilizada -->
             <div v-if="resultado && resultado.interpretation" class="mt-6">
@@ -88,79 +89,79 @@
 import axios from "axios";
 
 export default {
-    data() {
-        return {
-            items: [], // Lista de elementos con nombre, peso y valor
-            capacity: null, // Capacidad de la mochila
-            descripcionProblema: "", // Descripción del problema
-            resultado: null, // Resultado del backend
-            error: null, // Mensaje de error
-            loading: false, // Estado de carga
-        };
+  data() {
+    return {
+      items: [], // Lista de elementos con nombre, peso, valor y cantidad máxima
+      capacity: null, // Capacidad de la mochila
+      descripcionProblema: "", // Descripción del problema
+      resultado: null, // Resultado del backend
+      error: null, // Mensaje de error
+      loading: false, // Estado de carga
+    };
+  },
+  methods: {
+    formatInterpretation(interpretation) {
+      if (!interpretation) return "";
+      // Reemplazar saltos de línea por etiquetas <br>
+      let formatted = interpretation.replace(/\n/g, "<br>");
+      // Resaltar palabras clave
+      formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Negritas
+      formatted = formatted.replace(/`([^`]*)`/g, '<code>$1</code>'); // Código
+      return formatted;
     },
-    methods: {
-        formatInterpretation(interpretation) {
-            if (!interpretation) return "";
-            // Reemplazar saltos de línea por etiquetas <br>
-            let formatted = interpretation.replace(/\n/g, "<br>");
-            // Resaltar palabras clave
-            formatted = formatted.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>'); // Negritas
-            formatted = formatted.replace(/`([^`]*)`/g, '<code>$1</code>'); // Código
-            return formatted;
-        },
-        agregarElemento() {
-            this.items.push({ nombre: "", peso: null, valor: null });
-        },
-        eliminarElemento(index) {
-            this.items.splice(index, 1);
-        },
-        async calcularMochila() {
-            this.error = null;
-            this.resultado = null;
-            this.loading = true; // Activar la barra de carga
-
-            // Validar que haya elementos, capacidad y nombres válidos
-            if (this.items.length === 0 || this.capacity === null) {
-                this.error = "Debe ingresar al menos un elemento y la capacidad de la mochila.";
-                this.loading = false; // Desactivar la barra de carga
-                return;
-            }
-
-            try {
-                // Convertir los datos del frontend al formato del backend
-                const items_converted = this.items.map((item) => ({
-                    nombre: item.nombre || `Elemento ${this.items.indexOf(item) + 1}`, // Nombre del producto
-                    peso: parseFloat(item.peso),
-                    valor: parseFloat(item.valor),
-                }));
-
-                // Imprimir los datos antes de enviarlos
-                console.log("Datos enviados al backend:", {
-                    items: items_converted,
-                    capacity: this.capacity,
-                    descripcionProblema: this.descripcionProblema,
-                });
-
-                // Enviar los datos al backend
-                const response = await axios.post(`${this.$apiBaseUrl}/mochila`, {
-                    items: items_converted, // Incluye los nombres de los productos
-                    capacity: this.capacity,
-                    descripcionProblema: this.descripcionProblema,
-                });
-                console.log("Datos recibidos del backend:", response.data);
-
-                // Mostrar el resultado
-                this.resultado = response.data;
-            } catch (error) {
-                console.error("Error:", error);
-                this.error =
-                    error.response?.data?.error ||
-                    "Ocurrió un error al calcular la solución. Verifique su conexión o intente más tarde.";
-            } finally {
-                this.loading = false; // Desactivar la barra de carga
-            }
-        },
+    agregarElemento() {
+      this.items.push({ nombre: "", peso: null, valor: null, cantidad_maxima: null });
     },
+    eliminarElemento(index) {
+      this.items.splice(index, 1);
+    },
+    async calcularMochila() {
+      this.error = null;
+      this.resultado = null;
+      this.loading = true; // Activar la barra de carga
+
+      // Validar que haya elementos, capacidad y nombres válidos
+      if (this.items.length === 0 || this.capacity === null) {
+        this.error = "Debe ingresar al menos un elemento y la capacidad de la mochila.";
+        this.loading = false; // Desactivar la barra de carga
+        return;
+      }
+
+      try {
+        // Convertir los datos del frontend al formato del backend
+        const items_converted = this.items.map((item) => ({
+          nombre: item.nombre || `Elemento ${this.items.indexOf(item) + 1}`,
+          peso: parseFloat(item.peso),
+          valor: parseFloat(item.valor),
+          cantidad_maxima: parseInt(item.cantidad_maxima),
+        }));
+
+        // Imprimir los datos antes de enviarlos
+        console.log("Datos enviados al backend:", {
+          items: items_converted,
+          capacity: this.capacity,
+          descripcionProblema: this.descripcionProblema,
+        });
+
+        // Enviar los datos al backend
+        const response = await axios.post(`${this.$apiBaseUrl}/mochila`, {
+          items: items_converted,
+          capacity: this.capacity,
+          descripcionProblema: this.descripcionProblema,
+        });
+
+        // Mostrar el resultado
+        this.resultado = response.data;
+      } catch (error) {
+        console.error("Error:", error);
+        this.error =
+          error.response?.data?.error ||
+          "Ocurrió un error al calcular la solución. Verifique su conexión o intente más tarde.";
+      } finally {
+        this.loading = false; // Desactivar la barra de carga
+      }
+    },
+  },
 };
 </script>
 
